@@ -1,2 +1,2 @@
 # CursoPythonCod3r
-Objetivo de aprender e aperfeiçoar a linguagem Python.
+Objetivo de aprender e melhorar as habilidades relacionadas a linguagem Python.
