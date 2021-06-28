@@ -1,5 +1,9 @@
 #!/usr/local/bin/python3
-from datetime import datetime, time, timedelta
+from datetime import datetime, timedelta
+
+
+class TarefaNaoEncontrada(Exception):
+    pass
 
 
 class Projeto:
@@ -31,8 +35,12 @@ class Projeto:
         return [tarefa for tarefa in self.tarefas if not tarefa.feito]
 
     def procurar(self, descricao):
-        # Possível indexError, precisamos tratar
-        return [tarefa for tarefa in self.tarefas if tarefa.descricao == descricao[0]]
+        try:
+            # Possível IndexError
+            return [tarefa for tarefa in self.tarefas
+                    if tarefa.descricao == descricao[0]]
+        except IndexError as e:
+            raise TarefaNaoEncontrada(str(e))
 
     def __str__(self):
         return f'{self.nome} ({len(self.pendentes())} tarefa(s) pendente(s))'
@@ -85,6 +93,11 @@ def main():
     casa += TarefaRecorrente('Trocar', datetime.now(), 7)
     # casa.add(casa.procurar('Trocar').concluir())
     print(casa)
+
+    try:
+        casa.procurar('Lavar prato - ERRO')
+    except TarefaNaoEncontrada:
+        pass
 
     casa.procurar('Lavar prato')  # .concluir()
     for tarefa in casa:
