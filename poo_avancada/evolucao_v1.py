@@ -7,11 +7,13 @@ class Humano:
         self._idade = None
 
     # Get ler dado
-    def get_idade(self):
+    @property
+    def idade(self):
         return self._idade
 
     # Set alterar o dado
-    def set_idade(self, idade):
+    @idade.setter
+    def idade(self, idade):
         if idade < 0:
             raise ValueError('Idade deve ser um número positivo!')
         self._idade = idade
@@ -40,8 +42,8 @@ class HomoSapiens(Humano):
 
 if __name__ == '__main__':
     jose = HomoSapiens('José')
-    jose.set_idade(40)
-    print(f'Nome: {jose.nome} Idade: {jose.get_idade()}')
+    jose.idade = 40
+    print(f'Nome: {jose.nome} Idade: {jose.idade}')
 
     # jose = HomoSapiens('José')
     # grokn = Neanderthal('Grokn')
